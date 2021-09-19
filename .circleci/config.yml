@@ -69,8 +69,8 @@ jobs:
           name: login build run docker impage
           command: |
             docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PWD}
-            docker build -t rajeev1391/capston:1.0 .
-            docker run -d --rm --name myapp -p 8081:8080 rajeev1391/capston:1.0
+            docker build -t rajeev1391/capston:2.0 .
+            docker run -d --rm --name myapp -p 8081:8080 rajeev1391/capston:2.0
             sleep 10
             docker container ls
             sleep 5
@@ -84,7 +84,7 @@ jobs:
               docker stop myapp
               exit 1
             fi
-            docker push rajeev1391/capston:1.0
+            docker push rajeev1391/capston:2.0
       
       
  
@@ -149,14 +149,14 @@ workflows:
       - configure:
           requires:
             - install_lint
-      - create-large-cluster:
-          cluster-name: rajeev-capstone
-          requires:
-            - configure
+     # - create-large-cluster:
+     #     cluster-name: rajeev-capstone
+     #     requires:
+     #       - configure
       - testcluster:
           cluster-name: rajeev-capstone
           requires:
-            - create-large-cluster
+            - configure
       - createdeployment:
           cluster-name: rajeev-capstone
           requires:
@@ -167,7 +167,7 @@ workflows:
             - createdeployment              
       - aws-eks/update-container-image:
           cluster-name: rajeev-capstone
-          container-image-updates: 'rajeev-capstone-deployment=rajeev1391/capston:1.0'
+          container-image-updates: 'rajeev-capstone-deployment=rajeev1391/capston:2.0'
           get-rollout-status: true
           record: true
           requires:
