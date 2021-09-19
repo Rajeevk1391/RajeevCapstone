@@ -3,7 +3,7 @@
 # Capstone Project Overview
  this project is having rolling out deployment on Kubernetes
  
-# Project Main Tasks
+# Project  Tasks
 Steps in Completing This Project
 	Step 1: Propose and Scope the Project
 	Step 2: Use Jenkins or Circle CI, and implement blue/green or rolling deployment.
