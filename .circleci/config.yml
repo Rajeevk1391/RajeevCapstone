@@ -69,22 +69,22 @@ jobs:
           name: login build run docker impage
           command: |
             docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PWD}
-            docker build -t rajpurp/project55:2.0 .
-            docker run -d --rm --name myapp -p 8081:8080 rajpurp/project55:2.0
+            docker build -t rajeev1391/capston:1.0 .
+            docker run -d --rm --name myapp -p 8081:8080 rajeev1391/capston:1.0
             sleep 10
             docker container ls
             sleep 5
             export URL="http://localhost:8081"
             export output=$(curl -s $URL)
             echo "Output of curl : $output"
-            if [[ $output == *"Prakash"* ]]; then
+            if [[ $output == *"Rajeev"* ]]; then
                echo "Success"
               docker stop myapp
             else
               docker stop myapp
               exit 1
             fi
-            docker push rajpurp/project55:2.0
+            docker push rajeev1391/capston:1.0
       
       
  
@@ -122,7 +122,7 @@ jobs:
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: deployment.yml
-          resource-name: deployment/prakash-capstone-deployment
+          resource-name: deployment/rajeev-capstone-deployment
  
   testcluster:
     executor: aws-eks/python3
@@ -150,27 +150,27 @@ workflows:
           requires:
             - install_lint
 #      - create-large-cluster:
-#          cluster-name: prakash-capstone
+#          cluster-name: rajeev-capstone
 #          requires:
 #            - configure
       - testcluster:
-          cluster-name: prakash-capstone
+          cluster-name: rajeev-capstone
           requires:
             - configure
       - createdeployment:
-          cluster-name: prakash-capstone
+          cluster-name: rajeev-capstone
           requires:
             - testcluster
       - testdeployment:
-          cluster-name: prakash-capstone
+          cluster-name: rajeev-capstone
           requires:
             - createdeployment              
       - aws-eks/update-container-image:
-          cluster-name: prakash-capstone
-          container-image-updates: 'prakash-capstone-deployment=rajpurp/project55:2.0'
+          cluster-name: rajeev-capstone
+          container-image-updates: 'rajeev-capstone-deployment=rajeev1391/capston:1.0'
           get-rollout-status: true
           record: true
           requires:
             - testdeployment
-          resource-name: deployment/prakash-capstone-deployment        
+          resource-name: deployment/rajeev-capstone-deployment        
 

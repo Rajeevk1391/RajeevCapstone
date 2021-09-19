@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prakash-capstone-deployment
+  name: rajeev-capstone-deployment
   labels:
-    app: prakash-capstone-deployment
+    app: rajeev-capstone-deployment
   namespace: default
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: prakash-capstone-deployment
+      app: rajeev-capstone-deployment
   strategy:
     rollingUpdate:
       maxSurge: 50%
@@ -18,12 +18,12 @@ spec:
   template:
     metadata:
       labels:
-        app: prakash-capstone-deployment
+        app: rajeev-capstone-deployment
     spec:
       containers:
-        - image: rajpurp/project55:2.0
+        - image: rajeev1391/capston:1.0
           imagePullPolicy: Always
-          name: prakash-capstone-deployment
+          name: rajeev-capstone-deployment
           ports:
             - containerPort: 8080
 
@@ -32,13 +32,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: prakash-capstone-deployment
+  name: rajeev-capstone-deployment
   labels:
-    app: prakash-capstone-deployment
+    app: rajeev-capstone-deployment
 spec:
   type: LoadBalancer
   selector:
-    app: prakash-capstone-deployment
+    app: rajeev-capstone-deployment
   ports:
     - port: 8080
       targetPort: 8080
