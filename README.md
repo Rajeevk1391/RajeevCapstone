@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/rajpurp/PrakashCapstone/tree/main.svg?style=svg)](https://circleci.com/gh/rajpurp/PrakashCapstone/tree/main)
+[![CircleCI](https://circleci.com/gh/Rajeevk1391/RajeevCapstone/tree/main.svg?style=svg)](https://circleci.com/gh/Rajeevk1391/RajeevCapstone/tree/main)
 
 # Capstone Project Overview
  this project is having rolling out deployment on Kubernetes
@@ -12,7 +12,7 @@ Steps in Completing This Project
 	Step 5: Test your pipeline
 
 # Environment Setup:
-	clone git repo https://github.com/rajpurp/PrakashCapstone.git
+	clone git repo https://github.com/Rajeevk1391/RajeevCapstone.git
 	Run `make install` to install the necessary dependencies
 	Run make lint to test the dokcerfile and app.py file
 	Create kuberenetes cluster
