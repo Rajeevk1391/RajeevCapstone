@@ -1,14 +1,16 @@
 [![CircleCI](https://circleci.com/gh/Rajeevk1391/RajeevCapstone/tree/main.svg?style=svg)](https://circleci.com/gh/Rajeevk1391/RajeevCapstone/tree/main)
 
-# It is Capstone Udacity project to demonstrate implemnting docker image and kubernetes using Circleci pipeline. In this project Circleci orbs has been used
+# It is Capstone Udacity project to demonstrate implemnting docker image and kubernetes using Circleci pipeline.
 
   aws-cli: circleci/aws-cli@2.0.3
+  
   kubernetes: circleci/kubernetes@0.12.0
+  
   aws-eks: circleci/aws-eks@1.1.0
   
   
- # Project5 Cloud Devops Capstone Project Overview
- this project is having Amazon EKS fr creating  Kubernetes cluster
+ #Project5 Cloud Devops Capstone Project Overview
+  This project is having Amazon EKS fr creating  Kubernetes cluster
  
 # Project  Tasks
 Steps in Completing This Project
