@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/Rajeevk1391/RajeevCapstone/tree/main.svg?style=svg)](https://circleci.com/gh/Rajeevk1391/RajeevCapstone/tree/main)
-
 # It is Capstone Udacity project to demonstrate implemnting docker image and kubernetes using Circleci pipeline. In this project Circleci orbs has been used
 
 circleci/kubernetes@0.11.2
@@ -11,9 +9,13 @@ circleci/circleci-cli@0.1.2
 # Project  Tasks
 Steps in Completing This Project
  1: Scope and perpose of this Project
+ 
  2: Under this project, Circle CI have been used to implement the blue/green or rolling deployment.
- 3: i have used AWS Kubernetes as a Service and build the Kubernetes cluster.
+ 
+ 3: I have used AWS Kubernetes as a Service and build the Kubernetes cluster.
+ 
  4: Build your pipeline
+ 
  5: Test your pipeline
 
 # Environment Setup:
@@ -37,6 +39,8 @@ Steps in Completing This Project
 4.test cluster
 
 5.deploy the docker image at kubernetes
+
+
 6.test the deployment
      kubectl get svc
      kubectl get nodes
@@ -45,3 +49,4 @@ Steps in Completing This Project
      
 7.rolling out the app update 
 
+[![CircleCI](https://circleci.com/gh/Rajeevk1391/RajeevCapstone/tree/main.svg?style=svg)](https://circleci.com/gh/Rajeevk1391/RajeevCapstone/tree/main)
