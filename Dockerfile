@@ -17,6 +17,6 @@ RUN pip install --upgrade pip &&\
 EXPOSE 8080
 
 ## Step 5:
-CMD ["python", "application.py"]
+CMD ["python", "applications.py"]
 
 
