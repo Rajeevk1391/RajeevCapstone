@@ -22,14 +22,26 @@ Steps in Completing This Project
  
 2.Lint the App make lint and install required dependencies using requirement.txt
 
- 
+3.Create kuberenetes cluster (EKS cluster)
+ Install the eksctl tool
+   mkdir -p eksctl_download
+   curl --silent --location --retry 5 "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C eksctl_download
+   chmod +x eksctl_download/eksctl
+   SUDO=""
+   if [ $(id -u) -ne 0 ] && which sudo > /dev/null ; then
+   SUDO="sudo"
+   fi
+   $SUDO mv eksctl_download/eksctl /usr/local/bin/
+   rmdir eksctl_download
 
-clone git repo https://github.com/Rajeevk1391/RajeevCapstone.git
-	Run `make install` to install the necessary dependencies
-	Run make lint to test the dokcerfile and application.py file
-	Create kuberenetes cluster
-	test cluster
-	deploy the docker image at kubernetes
-	test the deployment
-	rolling out the app update 
+4.test cluster
+
+5.deploy the docker image at kubernetes
+6.test the deployment
+     kubectl get svc
+     kubectl get nodes
+     kubectl get deployment
+     kubectl get pods
+     
+7.rolling out the app update 
 
