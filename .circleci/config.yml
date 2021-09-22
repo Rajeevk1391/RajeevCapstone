@@ -41,89 +41,7 @@ jobs:
           ssh-access: false
           ssh-public-key: ''
 
-  linting_files:
-    docker:
-      - image: circleci/python:3.7.3-stretch
-    steps:
-      - checkout
-      - run:
-          name: install required dependencies using requirement.txt
-          command: |
-            python3 -m venv devops
-            source devops/bin/activate
-            make install
-      - run:
-          name: run lint Docker and app
-          command: |
-            source devops/bin/activate
-            make lint
-          no_output_timeout: 25m 
-
-          
-  configure:
-    machine: true
-    working_directory: ~/app
-    steps:
-      - checkout
-      - run:
-          name: login build run docker impage
-          command: |
-            docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PWD}
-            docker build -t rajeev1391/capston:3.0 .
-            docker run -d --rm --name myapp -p 8081:8080 rajeev1391/capston:3.0
-            sleep 10
-            docker container ls
-            sleep 5
-            export URL="http://localhost:8081"
-            export output=$(curl -s $URL)
-            echo "Output of curl : $output"
-            if [[ $output == *"capstone"* ]]; then
-               echo "Success"
-              docker stop myapp
-            else
-              docker stop myapp
-              exit 1
-            fi
-            docker push rajeev1391/capston:3.0
-      
-      
- 
-  testDodeployment:
-    executor: aws-eks/python3
-    parameters:
-      cluster-name:
-        description: |
-          Name of the EKS cluster
-        type: string
-    steps:
-      - kubernetes/install
-      - aws-eks/update-kubeconfig-with-authenticator:
-          cluster-name: << parameters.cluster-name >>
-      - run:
-          name: Kube cluster
-          command: |
-            kubectl get svc
-            kubectl get nodes
-            kubectl get deployment
-            kubectl get pods
- 
-  mydeployment:
-    executor: aws-eks/python3
-    parameters:
-      cluster-name:
-        description: |
-          Name of the EKS cluster
-        type: string
-    steps:
-      - checkout
-      - aws-eks/update-kubeconfig-with-authenticator:
-          cluster-name: << parameters.cluster-name >>
-          install-kubectl: true
-      - kubernetes/create-or-update-resource:
-          get-rollout-status: true
-          resource-file-path: application.yml
-          resource-name: deployment/rajeev-capstone-deployment
- 
+  
   testKucluster:
     executor: aws-eks/python3
     parameters:
@@ -145,32 +63,16 @@ jobs:
 workflows:
   default:
     jobs:
-      - linting_files
-      - configure:
-          requires:
-            - linting_files
-#      - create-rajeev-cluster:
-#          cluster-name: rajeev-capstone
+#      - linting_files
+#      - configure:
+#          requires:
+#           - linting_files
+      - create-rajeev-cluster:
+          cluster-name: capstone
 #          requires:
 #            - configure
       - testKucluster:
-          cluster-name: rajeev-capstone
+          cluster-name: capstone
           requires:
-            - configure
-      - mydeployment:
-          cluster-name: rajeev-capstone
-          requires:
-            - testKucluster
-      - testDodeployment:
-          cluster-name: rajeev-capstone
-          requires:
-            - mydeployment              
-      - aws-eks/update-container-image:
-          cluster-name: rajeev-capstone
-          container-image-updates: 'rajeev-capstone-deployment=rajeev1391/capston:3.0'
-          get-rollout-status: true
-          record: true
-          requires:
-            - testDodeployment
-          resource-name: deployment/rajeev-capstone-deployment        
+            - create-rajeev-cluster
 
